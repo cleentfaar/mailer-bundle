@@ -1,0 +1,14 @@
+services:
+    cl_mailer.type_registry:
+        class: CL\Mailer\Type\TypeRegistry
+
+    cl_mailer.message_resolver:
+        class: CL\Mailer\Message\MessageResolver
+        arguments:
+            - '@cl_mailer.type_registry'
+
+    cl_mailer.mailer:
+        class: CL\Mailer\Mailer
+        arguments:
+            - '@cl_mailer.message_resolver'
+            # - driver is assigned by compiler pass
