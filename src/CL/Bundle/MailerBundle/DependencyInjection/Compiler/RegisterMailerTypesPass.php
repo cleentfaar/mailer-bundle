@@ -10,16 +10,18 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class RegisterMailerTypesPass implements CompilerPassInterface
 {
+    const TAG_NAME = 'cl_mailer.type';
+    const REGISTRY_ID = 'cl_mailer.type_registry';
+
     /**
      * @inheritdoc
      */
     public function process(ContainerBuilder $container)
     {
-        $tag = 'cl_mailer.type';
-        $typeRegistryId = 'cl_mailer.type_registry';
+        $tag = self::TAG_NAME;
+        $typeRegistryId = self::REGISTRY_ID;
 
         if (!$container->has($typeRegistryId)) {
-            die($typeRegistryId);
             return;
         }
 

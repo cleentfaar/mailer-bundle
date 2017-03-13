@@ -11,8 +11,9 @@
     "cleentfaar/mailer": "dev-master"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.0",
-    "friendsofphp/php-cs-fixer": "^2.0"
+    "phpunit/phpunit": "^6.0",
+    "friendsofphp/php-cs-fixer": "^2.0",
+    "matthiasnoback/symfony-dependency-injection-test": "^2.0"
   },
   "suggest": {
     "cleentfaar/mailer-swiftmailer": "If you want to use the (recommended) Swiftmailer driver for sending e-mails"
