@@ -12,6 +12,11 @@ use Symfony\Component\DependencyInjection\Loader;
 class CLMailerExtension extends Extension
 {
     /**
+     * @const string
+     */
+    const MAILER_DRIVER_PARAMETER = 'cl_mailer_driver';
+
+    /**
      * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
@@ -21,6 +26,6 @@ class CLMailerExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('cl_mailer_driver', $config['driver']);
+        $container->setParameter(self::MAILER_DRIVER_PARAMETER, $config['driver']);
     }
 }

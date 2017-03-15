@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CL\Bundle\MailerBundle\DependencyInjection\Compiler;
 
+use CL\Bundle\MailerBundle\DependencyInjection\CLMailerExtension;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -11,47 +12,38 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class MailerDriverPass implements CompilerPassInterface
 {
+    const MAILER_SERVICE_ID = 'cl_mailer.mailer';
+
     /**
      * @inheritdoc
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$driver = $container->getParameter('cl_mailer_driver')) {
+        if (!$container->hasDefinition(self::MAILER_SERVICE_ID)) {
             return;
         }
+
+        if (!$container->hasParameter(CLMailerExtension::MAILER_DRIVER_PARAMETER)) {
+            return;
+        }
+
+        $driver = $container->getParameter(CLMailerExtension::MAILER_DRIVER_PARAMETER);
 
         if ($container->hasDefinition($driver)) {
             // service id supplied, can be used directly
             $serviceId = $driver;
         } else {
-            // class supplied, must be converted into a service first
-            $serviceId = sprintf('cl_mailer.driver.%s', $driver);
-
-            $definition = $this->resolveDriverDefinition($driver);
+            // class (fqcn) supplied, must be converted into a service first
+            $serviceId = sprintf('cl_mailer.driver.%s', str_replace('\\', '_', $driver));
+            $definition = new Definition($driver);
+            $definition->setPublic(false);
 
             $container->setDefinition($serviceId, $definition);
         }
 
-        $mailerDefinition = $container->getDefinition('cl_mailer.mailer');
+        $mailerDefinition = $container->getDefinition(self::MAILER_SERVICE_ID);
 
         $this->assignDriverArgument($mailerDefinition, $serviceId);
-    }
-
-    /**
-     * @param string $driver
-     *
-     * @return Definition
-     */
-    private function resolveDriverDefinition(string $driver): Definition
-    {
-        switch ($driver) {
-            default:
-                $class = $driver;
-                $args = [];
-                break;
-        }
-
-        return new Definition($class, $args);
     }
 
     /**
