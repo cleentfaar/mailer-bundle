@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
         $builder->root('cl_mailer')
             ->children()
                 ->scalarNode('driver')
-                    ->defaultValue('swiftmailer')
+                    ->defaultValue('cl_mailer.driver.swiftmailer')
                 ->end()
             ->end()
         ;
