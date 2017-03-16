@@ -12,12 +12,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
+        $defaultDriver = class_exists('CL\Mailer\Driver\SwiftmailerDriver') ? 'cl_mailer.driver.swiftmailer' : null;
         $builder = new TreeBuilder();
 
         $builder->root('cl_mailer')
             ->children()
                 ->scalarNode('driver')
-                    ->defaultValue(class_exists('CL\Mailer\Driver\SwiftmailerDriver') ? 'cl_mailer.driver.swiftmailer' : null)
+                    ->defaultValue($defaultDriver)
                 ->end()
             ->end()
         ;
