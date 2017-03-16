@@ -21,6 +21,6 @@ services:
         public: false
         class: CL\Mailer\Mailer
         arguments:
-            # driver can be overridden by compiler pass
+            # NOTE: driver (second argument) can be overridden by the MailerDriverPass compiler pass
             - '@cl_mailer.message_resolver'
             - '@cl_mailer.driver.swiftmailer'

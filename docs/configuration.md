@@ -1,11 +1,9 @@
 # Configuration
 
-The bundle comes with some predefined services that makes sending e-mails easier.
-
 #### Driver
-For sending the actual email, a driver is configured automatically. 
+For sending the actual email, a driver is needed. 
 If you have installed the (optional) [mailer-swiftmailer](https://github.com/cleentfaar/mailer-swiftmailer) package, 
-the Swiftmailer engine will be used by default. 
+the `SwiftmailerDriver` will be used by default. 
 
 If you choose not to install the [mailer-swiftmailer](https://github.com/cleentfaar/mailer-swiftmailer) package or 
 would like to use your own driver, you need to configure the bundle to do so:
