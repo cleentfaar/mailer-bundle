@@ -8,6 +8,8 @@ services:
         class: CL\Mailer\MessageResolver
         arguments:
             - '@cl_mailer.type_registry'
+            - '@translator'
+            - '@templating'
 
     cl_mailer.driver.swiftmailer:
         public: false
