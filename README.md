@@ -1,9 +1,11 @@
-# MailerBundle, a Symfony Bundle implementing the Mailer library
+# MailerBundle
 
 [![Build Status](https://travis-ci.org/cleentfaar/mailer-bundle.svg?branch=master)](https://travis-ci.org/cleentfaar/mailer-bundle)
 [![Scrutinizer](https://img.shields.io/scrutinizer/g/cleentfaar/mailer-bundle.svg)]()
 [![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/cleentfaar/mailer-bundle.svg)]()
 [![Github All Releases](https://img.shields.io/github/downloads/cleentfaar/mailer-bundle/total.svg)]()
+
+A Symfony Bundle implementing the Mailer library.
 
 
 ### Documentation
